@@ -1,0 +1,49 @@
+package net.azisaba.net.azisaba.chatlinker.bot
+
+import net.azisaba.net.azisaba.chatlinker.command.CommandManager
+import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.JDABuilder
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
+import net.dv8tion.jda.api.events.session.ReadyEvent
+import net.dv8tion.jda.api.hooks.ListenerAdapter
+import net.dv8tion.jda.api.requests.GatewayIntent
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+class ChatLinkerBot : ListenerAdapter() {
+    private lateinit var bot: JDA
+
+    fun main() {
+        val token = System.getenv("DISCORD_BOT_TOKEN")
+        if (token.isEmpty()) {
+            throw RuntimeException("Please set a DISCORD_BOT_TOKEN")
+        }
+
+        bot =
+            JDABuilder
+                .createDefault(token)
+                .enableIntents(
+                    listOf(
+                        GatewayIntent.GUILD_MESSAGES,
+                        GatewayIntent.MESSAGE_CONTENT,
+                    ),
+                ).addEventListeners(this)
+                .build()
+
+        CommandManager.init()
+        logger.info("Initialized!")
+    }
+
+    override fun onReady(event: ReadyEvent) {
+        bot.updateCommands().addCommands(CommandManager.getAllCommandData())
+        logger.info("Logged in as ${bot.selfUser.asTag}")
+    }
+
+    override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
+        CommandManager.onCommand(event)
+    }
+
+    companion object {
+        private val logger: Logger = LoggerFactory.getLogger(this::class.java)
+    }
+}
