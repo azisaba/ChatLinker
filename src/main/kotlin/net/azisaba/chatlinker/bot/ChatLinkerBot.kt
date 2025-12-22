@@ -5,11 +5,13 @@ import net.azisaba.net.azisaba.chatlinker.command.CommandManager
 import net.azisaba.net.azisaba.chatlinker.database.CLDatabase
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
+import net.dv8tion.jda.api.entities.WebhookClient
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.events.session.ReadyEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.requests.GatewayIntent
+import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -50,7 +52,14 @@ class ChatLinkerBot : ListenerAdapter() {
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
-        event.message.channelId
+        val message = event.message
+        val data = LinkDataCache.get(message.channelId) ?: return
+        WebhookClient
+            .createClient(
+                event.jda,
+                data.toChannelWebhook,
+            ).sendMessage(MessageCreateBuilder.fromMessage(event.message).build())
+            .queue()
     }
 
     companion object {
