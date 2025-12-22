@@ -25,10 +25,12 @@ object LinkDataCache {
     fun remove(from: String) {
         val data = CLDatabase.Links.getByFrom(from) ?: return
         CLDatabase.Links.remove(data.id.value)
+        linkMap.remove(from)
     }
 
     fun removeByTo(to: String) {
         val data = CLDatabase.Links.getByTo(to) ?: return
         CLDatabase.Links.remove(data.id.value)
+        linkMap.remove(data.channelFrom)
     }
 }

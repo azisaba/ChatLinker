@@ -43,7 +43,7 @@ class ChatLinkerBot : ListenerAdapter() {
     }
 
     override fun onReady(event: ReadyEvent) {
-        bot.updateCommands().addCommands(CommandManager.getAllCommandData())
+        bot.updateCommands().addCommands(CommandManager.getAllCommandData()).queue()
         logger.info("Logged in as ${bot.selfUser.asTag}")
     }
 
@@ -52,13 +52,17 @@ class ChatLinkerBot : ListenerAdapter() {
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
+        if (event.author.isBot || event.isWebhookMessage) return
         val message = event.message
+        val member = event.member ?: return
         val data = LinkDataCache.get(message.channelId) ?: return
         WebhookClient
             .createClient(
                 event.jda,
                 data.toChannelWebhook,
             ).sendMessage(MessageCreateBuilder.fromMessage(event.message).build())
+            .setUsername(member.nickname ?: member.effectiveName)
+            .setAvatarUrl(member.effectiveAvatarUrl)
             .queue()
     }
 

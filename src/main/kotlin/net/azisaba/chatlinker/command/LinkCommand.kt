@@ -25,6 +25,9 @@ class LinkCommand : Command() {
                     channel("from", "送信元", true)
                     boolean("remove-to", "反対方向の連携も削除するか")
                 }
+                subCommand("get", "チャンネル連携を確認") {
+                    channel("from", "送信元", true)
+                }
             }
 
     override fun onCommand(event: SlashCommandInteractionEvent) {
@@ -33,6 +36,7 @@ class LinkCommand : Command() {
         when (event.subcommandName) {
             "add" -> add(guild, member, event)
             "remove" -> remove(guild, member, event)
+            "get" -> get(guild, member, event)
         }
     }
 
@@ -79,5 +83,22 @@ class LinkCommand : Command() {
             LinkDataCache.removeByTo(channelFrom.id)
         }
         response.respond("連携を削除しました。")
+    }
+
+    fun get(
+        guild: Guild,
+        member: Member,
+        event: SlashCommandInteractionEvent,
+    ) {
+        val response = event.deferReply(true)
+        val channelFrom = event.optionChannel("from")?.asTextChannel() ?: return
+        val data = LinkDataCache.get(channelFrom.id)
+        response.respond(
+            if (data == null) {
+                "見つかりませんでした"
+            } else {
+                "Connected to ${data.toChannelId}"
+            },
+        )
     }
 }
