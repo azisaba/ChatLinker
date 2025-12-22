@@ -36,5 +36,6 @@ tasks {
 
     shadowJar {
         minimize()
+        archiveFileName.set("ChatLinker.jar")
     }
 }
