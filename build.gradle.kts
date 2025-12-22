@@ -20,6 +20,7 @@ dependencies {
     }
     implementation(libs.bundles.exposed)
     implementation(libs.mariadbJavaClient)
+    implementation(libs.hikariCP)
     implementation(libs.guava)
     implementation(libs.slf4jSimple)
 }

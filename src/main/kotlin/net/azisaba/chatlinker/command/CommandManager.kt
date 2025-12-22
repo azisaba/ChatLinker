@@ -1,4 +1,5 @@
 package net.azisaba.net.azisaba.chatlinker.command
+import net.azisaba.net.azisaba.chatlinker.bot.ChatLinkerBot
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import org.slf4j.Logger
@@ -11,7 +12,8 @@ object CommandManager {
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
     private val commandMap: MutableMap<String, Command> = mutableMapOf()
 
-    fun init() {
+    fun init(bot: ChatLinkerBot) {
+        register(LinkCommand())
     }
 
     private fun register(command: Command) {

@@ -1,9 +1,12 @@
 package net.azisaba.net.azisaba.chatlinker.bot
 
+import net.azisaba.net.azisaba.chatlinker.cache.LinkDataCache
 import net.azisaba.net.azisaba.chatlinker.command.CommandManager
+import net.azisaba.net.azisaba.chatlinker.database.CLDatabase
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.events.session.ReadyEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -30,7 +33,10 @@ class ChatLinkerBot : ListenerAdapter() {
                 ).addEventListeners(this)
                 .build()
 
-        CommandManager.init()
+        CLDatabase.init()
+        LinkDataCache.init()
+
+        CommandManager.init(this)
         logger.info("Initialized!")
     }
 
@@ -41,6 +47,10 @@ class ChatLinkerBot : ListenerAdapter() {
 
     override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
         CommandManager.onCommand(event)
+    }
+
+    override fun onMessageReceived(event: MessageReceivedEvent) {
+        event.message.channelId
     }
 
     companion object {
