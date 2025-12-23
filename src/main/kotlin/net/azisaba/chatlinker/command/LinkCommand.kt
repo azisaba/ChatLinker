@@ -5,8 +5,11 @@ import net.azisaba.net.azisaba.chatlinker.extension.boolean
 import net.azisaba.net.azisaba.chatlinker.extension.channel
 import net.azisaba.net.azisaba.chatlinker.extension.optionBoolean
 import net.azisaba.net.azisaba.chatlinker.extension.optionChannel
+import net.azisaba.net.azisaba.chatlinker.extension.optionString
 import net.azisaba.net.azisaba.chatlinker.extension.respond
+import net.azisaba.net.azisaba.chatlinker.extension.string
 import net.azisaba.net.azisaba.chatlinker.extension.subCommand
+import net.azisaba.net.azisaba.chatlinker.extension.urlToTextChannel
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
@@ -17,8 +20,8 @@ class LinkCommand : Command() {
         get() =
             slashCommand("link", "チャンネル連携") {
                 subCommand("add", "チャンネル連携を追加") {
-                    channel("from", "送信元", true)
-                    channel("to", "送信先", true)
+                    string("from", "送信元", true)
+                    string("to", "送信先", true)
                     boolean("non-twoway", "双方向の送信を無効にするか")
                 }
                 subCommand("remove", "チャンネル連携を削除") {
@@ -46,8 +49,8 @@ class LinkCommand : Command() {
         event: SlashCommandInteractionEvent,
     ) {
         val response = event.deferReply(true)
-        val channelFrom = event.optionChannel("from")?.asTextChannel() ?: return
-        val channelTo = event.optionChannel("to")?.asTextChannel() ?: return
+        val channelFrom = event.optionString("from")?.urlToTextChannel(event.jda) ?: return
+        val channelTo = event.optionString("to")?.urlToTextChannel(event.jda) ?: return
         val nonTwoWay = event.optionBoolean("non-twoway") ?: false
         if (LinkDataCache.get(channelFrom.id) != null) {
             response.setContent("${channelFrom.asMention} はすでに連携されています。").queue()
