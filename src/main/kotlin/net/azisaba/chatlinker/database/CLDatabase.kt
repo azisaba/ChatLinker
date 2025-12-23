@@ -62,13 +62,17 @@ object CLDatabase {
 
     object Links {
         fun add(
+            fromGuild: String,
             from: String,
+            toGuild: String,
             to: String,
             toWebhook: String,
         ) {
             transaction {
                 ChannelLinkedData.new {
+                    guildFrom = fromGuild
                     channelFrom = from
+                    guildTo = toGuild
                     channelTo = to
                     webhook = toWebhook
                 }

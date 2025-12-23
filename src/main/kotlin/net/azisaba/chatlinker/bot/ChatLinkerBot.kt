@@ -6,6 +6,7 @@ import net.azisaba.net.azisaba.chatlinker.database.CLDatabase
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.WebhookClient
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.events.session.ReadyEvent
@@ -45,6 +46,13 @@ class ChatLinkerBot : ListenerAdapter() {
     override fun onReady(event: ReadyEvent) {
         bot.updateCommands().addCommands(CommandManager.getAllCommandData()).queue()
         logger.info("Logged in as ${bot.selfUser.asTag}")
+
+        logger.info("Warming up now...")
+        for (data in LinkDataCache.getAll()) {
+            bot.getGuildById(data.fromGuildId)?.getChannelById(TextChannel::class.java, data.fromChannelId)
+            bot.getGuildById(data.toGuildId)?.getChannelById(TextChannel::class.java, data.toChannelId)
+        }
+        logger.info("Warming up completed!")
     }
 
     override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {

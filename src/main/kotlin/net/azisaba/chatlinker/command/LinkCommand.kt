@@ -58,7 +58,13 @@ class LinkCommand : Command() {
         }
 
         val webhook = channelTo.createWebhook("chatlinker").complete().url
-        LinkDataCache.add(channelFrom.id, channelTo.id, webhook)
+        LinkDataCache.add(
+            channelFrom.guild.id,
+            channelFrom.id,
+            channelTo.guild.id,
+            channelTo.id,
+            webhook,
+        )
 
         if (!nonTwoWay) {
             if (LinkDataCache.get(channelTo.id) != null) {
@@ -67,7 +73,13 @@ class LinkCommand : Command() {
             }
 
             val reversedWebhook = channelFrom.createWebhook("chatlinker").complete().url
-            LinkDataCache.add(channelTo.id, channelFrom.id, reversedWebhook)
+            LinkDataCache.add(
+                channelTo.guild.id,
+                channelTo.id,
+                channelFrom.guild.id,
+                channelFrom.id,
+                reversedWebhook,
+            )
         }
         response.respond("連携作業が完了しました。")
     }

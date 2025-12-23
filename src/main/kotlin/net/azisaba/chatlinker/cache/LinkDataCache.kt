@@ -7,19 +7,37 @@ object LinkDataCache {
 
     fun init() {
         CLDatabase.Links.getAll().forEach { data ->
-            linkMap[data.channelFrom] = LinkData(data.channelFrom, data.channelTo, data.webhook)
+            linkMap[data.channelFrom] =
+                LinkData(
+                    data.guildFrom,
+                    data.channelFrom,
+                    data.guildTo,
+                    data.channelTo,
+                    data.webhook,
+                )
         }
     }
 
     fun get(from: String): LinkData? = linkMap[from]
 
+    fun getAll(): List<LinkData> = linkMap.values.toList()
+
     fun add(
+        fromGuild: String,
         from: String,
+        toGuild: String,
         to: String,
         webhook: String,
     ) {
-        CLDatabase.Links.add(from, to, webhook)
-        linkMap[from] = LinkData(from, to, webhook)
+        CLDatabase.Links.add(fromGuild, from, toGuild, to, webhook)
+        linkMap[from] =
+            LinkData(
+                fromGuild,
+                from,
+                toGuild,
+                to,
+                webhook,
+            )
     }
 
     fun remove(from: String) {
