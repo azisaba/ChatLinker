@@ -61,6 +61,7 @@ class ChatLinkerBot : ListenerAdapter() {
                 event.jda,
                 data.toChannelWebhook,
             ).sendMessage(MessageCreateBuilder.fromMessage(event.message).build())
+            .setFiles(message.attachments.map { attachment -> attachment.proxy.downloadAsFileUpload(attachment.fileName) })
             .setUsername(member.nickname ?: member.effectiveName)
             .setAvatarUrl(member.effectiveAvatarUrl)
             .queue()
