@@ -35,7 +35,7 @@ tasks {
     }
 
     shadowJar {
-        minimize()
+        mergeServiceFiles()
         manifest {
             attributes("Main-Class" to "net.azisaba.chatlinker.MainKt")
         }
