@@ -36,6 +36,9 @@ tasks {
 
     shadowJar {
         minimize()
+        manifest {
+            attributes("Main-Class" to "net.azisaba.chatlinker.MainKt")
+        }
         archiveFileName.set("ChatLinker.jar")
     }
 }
