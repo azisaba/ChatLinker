@@ -1,4 +1,4 @@
-package net.azisaba.net.azisaba.chatlinker
+package net.azisaba.chatlinker
 
 import net.azisaba.chatlinker.bot.ChatLinkerBot
 
