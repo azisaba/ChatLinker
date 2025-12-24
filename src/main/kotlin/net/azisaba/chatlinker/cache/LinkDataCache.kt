@@ -1,6 +1,6 @@
-package net.azisaba.net.azisaba.chatlinker.cache
+package net.azisaba.chatlinker.cache
 
-import net.azisaba.net.azisaba.chatlinker.database.CLDatabase
+import net.azisaba.chatlinker.database.CLDatabase
 
 object LinkDataCache {
     private val linkMap: MutableMap<String, LinkData> = mutableMapOf()

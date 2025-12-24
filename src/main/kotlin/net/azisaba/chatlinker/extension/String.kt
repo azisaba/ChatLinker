@@ -1,4 +1,4 @@
-package net.azisaba.net.azisaba.chatlinker.extension
+package net.azisaba.chatlinker.extension
 
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel

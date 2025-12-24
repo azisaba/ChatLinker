@@ -1,15 +1,15 @@
-package net.azisaba.net.azisaba.chatlinker.command
+package net.azisaba.chatlinker.command
 
-import net.azisaba.net.azisaba.chatlinker.cache.LinkDataCache
-import net.azisaba.net.azisaba.chatlinker.extension.boolean
-import net.azisaba.net.azisaba.chatlinker.extension.channel
-import net.azisaba.net.azisaba.chatlinker.extension.optionBoolean
-import net.azisaba.net.azisaba.chatlinker.extension.optionChannel
-import net.azisaba.net.azisaba.chatlinker.extension.optionString
-import net.azisaba.net.azisaba.chatlinker.extension.respond
-import net.azisaba.net.azisaba.chatlinker.extension.string
-import net.azisaba.net.azisaba.chatlinker.extension.subCommand
-import net.azisaba.net.azisaba.chatlinker.extension.urlToTextChannel
+import net.azisaba.chatlinker.cache.LinkDataCache
+import net.azisaba.chatlinker.extension.boolean
+import net.azisaba.chatlinker.extension.channel
+import net.azisaba.chatlinker.extension.optionBoolean
+import net.azisaba.chatlinker.extension.optionChannel
+import net.azisaba.chatlinker.extension.optionString
+import net.azisaba.chatlinker.extension.respond
+import net.azisaba.chatlinker.extension.string
+import net.azisaba.chatlinker.extension.subCommand
+import net.azisaba.chatlinker.extension.urlToTextChannel
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent

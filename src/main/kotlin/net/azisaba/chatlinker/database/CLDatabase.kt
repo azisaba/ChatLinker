@@ -1,4 +1,4 @@
-package net.azisaba.net.azisaba.chatlinker.database
+package net.azisaba.chatlinker.database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource

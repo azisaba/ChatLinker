@@ -1,8 +1,8 @@
-package net.azisaba.net.azisaba.chatlinker.bot
+package net.azisaba.chatlinker.bot
 
-import net.azisaba.net.azisaba.chatlinker.cache.LinkDataCache
-import net.azisaba.net.azisaba.chatlinker.command.CommandManager
-import net.azisaba.net.azisaba.chatlinker.database.CLDatabase
+import net.azisaba.chatlinker.cache.LinkDataCache
+import net.azisaba.chatlinker.command.CommandManager
+import net.azisaba.chatlinker.database.CLDatabase
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.WebhookClient

@@ -1,6 +1,6 @@
 package net.azisaba.net.azisaba.chatlinker
 
-import net.azisaba.net.azisaba.chatlinker.bot.ChatLinkerBot
+import net.azisaba.chatlinker.bot.ChatLinkerBot
 
 fun main() {
     // headless mode

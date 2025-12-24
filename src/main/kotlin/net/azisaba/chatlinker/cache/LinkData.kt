@@ -1,4 +1,4 @@
-package net.azisaba.net.azisaba.chatlinker.cache
+package net.azisaba.chatlinker.cache
 
 data class LinkData(
     val fromGuildId: String,
