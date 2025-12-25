@@ -72,6 +72,7 @@ class ChatLinkerBot : ListenerAdapter() {
             .setFiles(message.attachments.map { attachment -> attachment.proxy.downloadAsFileUpload(attachment.fileName) })
             .setUsername(member.nickname ?: member.effectiveName)
             .setAvatarUrl(member.effectiveAvatarUrl)
+            .setAllowedMentions(mutableSetOf())
             .queue()
     }
 
