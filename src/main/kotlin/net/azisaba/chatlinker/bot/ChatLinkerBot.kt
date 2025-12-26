@@ -25,6 +25,8 @@ class ChatLinkerBot : ListenerAdapter() {
             throw RuntimeException("Please set a DISCORD_BOT_TOKEN")
         }
 
+        enabledDebugMode = System.getenv("DEBUG_MODE")?.lowercase() == "true"
+
         bot =
             JDABuilder
                 .createDefault(token)
@@ -44,7 +46,25 @@ class ChatLinkerBot : ListenerAdapter() {
     }
 
     override fun onReady(event: ReadyEvent) {
-        bot.updateCommands().addCommands(CommandManager.getAllCommandData()).queue()
+        logger.info("Registering commands...")
+        bot.updateCommands().addCommands(CommandManager.getAllCommandData()).complete().forEach { cmd ->
+            logger.info("- {}", cmd.fullCommandName)
+            cmd.subcommands.forEach { subcommand ->
+                logger.info("  - {}", subcommand.name)
+            }
+        }
+
+        if (enabledDebugMode) {
+            logger.info("=== Retrieved commands ===")
+            bot.retrieveCommands().complete().forEach { cmd ->
+                logger.info("- {}", cmd.fullCommandName)
+                cmd.subcommands.forEach { subcommand ->
+                    logger.info("  - {}", subcommand.name)
+                }
+            }
+            logger.info("==========================")
+        }
+
         logger.info("Logged in as ${bot.selfUser.asTag}")
 
         logger.info("Warming up now...")
@@ -78,5 +98,7 @@ class ChatLinkerBot : ListenerAdapter() {
 
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(this::class.java)
+        var enabledDebugMode: Boolean = false
+            private set
     }
 }
