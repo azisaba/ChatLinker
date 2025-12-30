@@ -1,15 +1,17 @@
 package net.azisaba.chatlinker.command
 
 import net.azisaba.chatlinker.cache.LinkDataCache
-import net.azisaba.chatlinker.extension.boolean
-import net.azisaba.chatlinker.extension.channel
-import net.azisaba.chatlinker.extension.optionBoolean
-import net.azisaba.chatlinker.extension.optionChannel
-import net.azisaba.chatlinker.extension.optionString
-import net.azisaba.chatlinker.extension.respond
-import net.azisaba.chatlinker.extension.string
-import net.azisaba.chatlinker.extension.subCommand
-import net.azisaba.chatlinker.extension.urlToTextChannel
+import net.azisaba.jdawrap.command.Command
+import net.azisaba.jdawrap.command.slashCommand
+import net.azisaba.jdawrap.extension.boolean
+import net.azisaba.jdawrap.extension.channel
+import net.azisaba.jdawrap.extension.optionBoolean
+import net.azisaba.jdawrap.extension.optionChannel
+import net.azisaba.jdawrap.extension.optionString
+import net.azisaba.jdawrap.extension.respond
+import net.azisaba.jdawrap.extension.string
+import net.azisaba.jdawrap.extension.subCommand
+import net.azisaba.jdawrap.extension.urlToTextChannel
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent

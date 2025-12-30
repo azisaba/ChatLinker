@@ -1,4 +1,4 @@
-package net.azisaba.chatlinker.command
+package net.azisaba.jdawrap.command
 
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData

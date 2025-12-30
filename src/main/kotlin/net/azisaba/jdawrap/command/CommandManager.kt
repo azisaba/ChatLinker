@@ -1,5 +1,6 @@
-package net.azisaba.chatlinker.command
+package net.azisaba.jdawrap.command
 import net.azisaba.chatlinker.bot.ChatLinkerBot
+import net.azisaba.chatlinker.command.LinkCommand
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import org.slf4j.Logger

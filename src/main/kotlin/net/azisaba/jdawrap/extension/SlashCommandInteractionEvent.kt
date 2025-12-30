@@ -1,4 +1,4 @@
-package net.azisaba.chatlinker.extension
+package net.azisaba.jdawrap.extension
 
 import net.dv8tion.jda.api.entities.Member
 import net.dv8tion.jda.api.entities.channel.unions.GuildChannelUnion
