@@ -14,7 +14,7 @@ fun slashCommand(
 ): SlashCommandData =
     Commands.slash(name, description).apply {
         if (guildOnly) {
-            setContexts(InteractionContextType.GUILD)
+            setContexts(InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL)
         }
         if (adminOnly) {
             defaultPermissions = DefaultMemberPermissions.DISABLED
