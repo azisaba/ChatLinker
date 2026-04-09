@@ -1,0 +1,16 @@
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_USER: chatlinker
+      MARIADB_PASSWORD: chatlinkerpass
+      MARIADB_DATABASE: chatlinkerdb
+      MARIADB_ROOT_PASSWORD: chatlinkeradmin
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+    db_data:
